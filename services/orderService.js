@@ -12,9 +12,10 @@ const createOrder = async (orderData) => {
         .input('status_id', sql.Int, orderData.status_id)
         .query(`
             INSERT INTO Orders (customer_id, merchant_id, warehouse_id, time_id, total_price, status_id)
+            OUTPUT INSERTED.order_id
             VALUES (@customer_id, @merchant_id, @warehouse_id, @time_id, @total_price, @status_id)
         `);
-    return result.rowsAffected[0];
+    return result.recordset[0].order_id;
 };
 
 // get all orders where merchant-ID=1
