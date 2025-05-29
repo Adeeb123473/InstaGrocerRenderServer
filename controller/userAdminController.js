@@ -101,8 +101,8 @@ const loginUserAdmin = async (req, res) => {
             // Set token in HttpOnly cookie
             res.cookie('adminToken', token, {
                 httpOnly: true,
-                // secure: process.env.NODE_ENV === 'production',
-                sameSite: 'strict',
+                secure: process.env.NODE_ENV === 'production',
+                sameSite: 'none',
                 maxAge: expiresIn * 1000 // Sets how long the cookie will last in milliseconds before expiring. The cookie will persist even if browser is closed until this time passes
             });
 
